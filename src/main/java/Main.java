@@ -1,10 +1,11 @@
 import java.util.List;
 
+// importa clases necesarias para trabajar con Hibernate
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
-
+// importa las entidades Authors y Books, que representan tablas en la BD.
 import ud04_01Hibernate.entity.Authors;
 import ud04_01Hibernate.entity.Books;
 
@@ -12,12 +13,10 @@ public class Main {
 
     public static void main(String[] args) {
     	
-    	/*  SessionFactory genera objetos Session, la creación de SessionFactory es cara en
-			cuanto a recursos por los que solo utilizaremos una por programa (singleton), 
-			creada en la inicialización. */
-        SessionFactory sf = new Configuration() // config para conectar a BD y mapear obj/tablas.
-        		.configure()
-        		.buildSessionFactory();
+    	// SessionFactory genera objetos Session
+        SessionFactory sf = new Configuration() // Carga config de hibernate.cfg.xml por defecto
+        		.configure() // Aplica configuraciones como URL, credenciales, clases mapeadas...
+        		.buildSessionFactory(); // Crea una fábrica de sesiones (SessionFactory)
         
         /*  Session es similar a la conexión JDBC, guarda objetos, hace queries y gestiona
 			transacciones. */
