@@ -1,0 +1,24 @@
+CREATE DATABASE biblio;
+
+USE biblio;
+
+CREATE TABLE authors (
+    cod VARCHAR(5) PRIMARY KEY,
+    name VARCHAR(60)
+);
+
+CREATE TABLE books (
+    id INTEGER PRIMARY KEY,
+    title VARCHAR(60),
+    codauthor VARCHAR(5),
+    FOREIGN KEY (codauthor) REFERENCES authors(cod)
+);
+
+INSERT INTO authors VALUES 
+    ('WSHAK', 'William Shakespeare'),
+    ('GMART', 'George R. R. Martin');
+
+INSERT INTO books VALUES 
+    (1, 'Macbeth', 'WSHAK'),
+    (2, 'A Game of Thrones', 'GMART');
+
