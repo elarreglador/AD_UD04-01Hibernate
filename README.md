@@ -1,4 +1,4 @@
-# UD04-01Hibernate (
+# UD04-01Hibernate
 
 ## Descripcion
 Codigo minimo para conectar a hibernate. No se realiza ninguna otra tarea, no hay acceso a datos ni escritura en la BD.
