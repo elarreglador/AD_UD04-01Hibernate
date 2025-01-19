@@ -11,8 +11,18 @@ import ud04_01Hibernate.entity.Books;
 public class Main {
 
     public static void main(String[] args) {
-        SessionFactory sf = new Configuration().configure().buildSessionFactory();
+    	
+    	/*  SessionFactory genera objetos Session, la creación de SessionFactory es cara en
+			cuanto a recursos por los que solo utilizaremos una por programa (singleton), 
+			creada en la inicialización. */
+        SessionFactory sf = new Configuration() // config para conectar a BD y mapear obj/tablas.
+        		.configure()
+        		.buildSessionFactory();
+        
+        /*  Session es similar a la conexión JDBC, guarda objetos, hace queries y gestiona
+			transacciones. */
         Session session = sf.openSession();
+        
         if ( session != null ) {
         	System.out.println("Sesion abierta");
         } else {
@@ -30,7 +40,7 @@ public class Main {
     
     // Muestra los libros y su autor
     public static void showBooks(Session session) {
-    	Query<Books> q = session.createQuery("from Books", Books.class);
+    	Query<Books> q = session.createQuery("FROM Books", Books.class);
     	List<Books> results = q.getResultList();
     	System.out.println("Showing books data: ");
     	
@@ -39,7 +49,7 @@ public class Main {
     				result.getId() + ": " + result.getTitle() + ", by " + (
     						result.getAuthors() != null 
     							?result.getAuthors().getName()
-    							: "Anonimous"
+    							: "anonymous"
     				)
     		);
     	}
@@ -48,12 +58,16 @@ public class Main {
     
     // Muestra los autores y sus libros
     public static void showAuthors(Session session) {
-    	Query<Authors> q = session.createQuery("from Authors", Authors.class);
+    	Query<Authors> q = session.createQuery("FROM Authors", Authors.class);
     	List<Authors> results = q.list();
     	System.out.println("Showing authors data: ");
     	
     	for (Authors result : results) {
-    		System.out.println("The author " + result.getCod() + " with name " + result.getName() + " has written:");
+    		System.out.println(
+    				"The author " + result.getCod() + 
+    				" with name " + result.getName() + 
+    				" has written:"
+    		);
     		result.getBookses().forEach(e -> 
     		System.out.println("- " + ((Books) e).getTitle())
     		);
