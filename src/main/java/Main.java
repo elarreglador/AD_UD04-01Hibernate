@@ -9,15 +9,19 @@ import org.hibernate.query.Query;
 import ud04_01Hibernate.entity.Authors;
 import ud04_01Hibernate.entity.Books;
 
+
 public class Main {
 
     public static void main(String[] args) {
     	
     	// SessionFactory genera objetos Session
-        SessionFactory sf = new Configuration() // Carga config de hibernate.cfg.xml por defecto
+        /* SessionFactory sf = new Configuration() // Carga config de hibernate.cfg.xml por defecto
         		.configure() // Aplica configuraciones como URL, credenciales, clases mapeadas...
         		.buildSessionFactory(); // Crea una fábrica de sesiones (SessionFactory)
-        
+        */
+    	// Llamamos a una funcion para simplificar la lectura
+    	SessionFactory sf = HibernateUtil.getSessionFactory();
+    	
         /*  Session es similar a la conexión JDBC, guarda objetos, hace queries y gestiona
 			transacciones. */
         Session session = sf.openSession();
@@ -71,6 +75,7 @@ public class Main {
     		System.out.println("- " + ((Books) e).getTitle())
     		);
     	}
+    	
     }
     
     
